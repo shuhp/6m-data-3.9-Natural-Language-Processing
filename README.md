@@ -46,16 +46,19 @@ No laptop GPU or local install needed — these notebooks run on Colab's free CP
 - Watch the [lesson intro video](https://youtu.be/uworo8tadFQ) (~5 min)
 - Read [pre-class.md](pre-class.md)
 - Watch the linked Jay Alammar embeddings primer
+- Explore the [**interactive key-concepts page**](https://su-ntu-ctp.github.io/6m-data-3.9-Natural-Language-Processing/) after the videos (GitHub Pages)
 - Run [notebooks/01_monday_morning.ipynb](notebooks/01_monday_morning.ipynb) — feel the keyword-search failure mode firsthand
 
-## Phase 2 — In-class (≈ 90 min lecture + 90 min code-along)
+## Phase 2 — In-class (≈ 45–60 min slide recap + 90 min code-along + 15 min exit survey)
 
-- Concept walkthrough: instructor uses the [**interactive key-concepts walkthrough →**](https://su-ntu-ctp.github.io/6m-data-3.9-Natural-Language-Processing/) (revisit any time)
+- Concept recap with slides (~45–60 min): instructor recaps the key concepts — you already explored the [interactive key-concepts walkthrough](https://su-ntu-ctp.github.io/6m-data-3.9-Natural-Language-Processing/) pre-class (revisit any time)
 - **Short reference & review →** [**lesson.md**](./lesson.md) (overview, key takeaways, validation checklist, 7-question review, course map to L10)
 - Code-along notebooks (in order):
   - [02_words_to_vectors.ipynb](notebooks/02_words_to_vectors.ipynb) — one-hot encoding, bag-of-words, the embedding intuition
   - [03_pretrained_embeddings.ipynb](notebooks/03_pretrained_embeddings.ipynb) — `SentenceTransformer` + cosine similarity
   - [04_semantic_search.ipynb](notebooks/04_semantic_search.ipynb) — build a search engine, beat TF-IDF
+
+- Class exit survey (~15 min): quick feedback to close the session
 
 ## Phase 3 — Post-class (self-study, optional)
 
@@ -72,7 +75,7 @@ No laptop GPU or local install needed — these notebooks run on Colab's free CP
 | `lesson.md`              | Short reference: overview, takeaways, validation checklist, review Q&A, course map |
 | `reference.md`           | Glossary of 22 NLP/embedding terms |
 | `environment.yml`        | Conda env spec |
-| `docs/index.html`        | Interactive key-concepts walkthrough (GitHub Pages) |
+| `docs/index.html`        | Interactive key-concepts page — explore during pre-class (GitHub Pages) |
 | `notebooks/`             | 4 in-class NBs + assignment + extensions + data |
 
 ---

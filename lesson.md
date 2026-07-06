@@ -1,6 +1,6 @@
 # Lesson — L09 NLP, Embeddings & Semantic Search
 
-> **Chapter 9 of the NorthStar Retail story.** *Sarah Chen · Customer Experience Analyst · January 2023.*
+> **Chapter 9 of the NorthStar Retail story.** *Sarah Chen · Customer Experience Analyst · Week 10.*
 > The L08 auto-tagger shipped on Friday. Monday morning, an angry email lands: a shopper typed *"blue summer dress"* into NorthStar's search bar. The catalogue has ten dresses that fit. None came up — the descriptions say *frock*, *sundress*, *gown*. Keyword search breaks on synonyms.
 > This lesson is how Sarah replaces it.
 
@@ -54,6 +54,36 @@ Skip any of these and you ship a system that *feels* smarter but quietly regress
 
 ---
 
+## Key concepts — plain-English review
+
+Use this as a self-check before the review questions: read each concept, and if any feels fuzzy, jump back to the notebook or section that teaches it.
+
+**Tokens** — The pieces text is chopped into before a model can use it — roughly words or word-fragments. To a computer, "frock" and "dress" are just two different tokens with no built-in connection.
+*Real-world use:* A call-centre system splitting customer complaints into tokens before routing them to the right team.
+
+**One-hot / bag-of-words** — The naive way to turn words into numbers: give every word its own slot and count occurrences. Simple, but every pair of different words looks equally unrelated — synonyms included.
+*Real-world use:* Early spam filters counted words like "free" and "winner" — and spammers dodged them by writing "fr3e".
+
+**Embeddings** — A learned list of numbers per word or sentence, arranged so that similar meanings end up close together. Meaning becomes geometry: "frock" lands near "dress", far from "spaceship".
+*Real-world use:* Spotify places songs and listeners in the same embedding space to recommend music that "feels" similar.
+
+**Vector similarity / cosine** — The maths for "how close are two meanings?" — measure the angle between two embedding vectors. Read it as a *ranking* (which candidate is closest), not a percentage score.
+*Real-world use:* A law firm's tool ranking past contracts by similarity to a new clause under review.
+
+**Pretrained embedding models** — Models like `all-MiniLM-L6-v2`, already trained on a billion sentence pairs. You don't train anything — call `.encode()` and get a meaning-vector back.
+*Real-world use:* A hospital groups thousands of free-text incident reports into themes without labelling a single one.
+
+**Semantic search** — Embed your catalogue once, embed each query as it arrives, return the closest matches. Finds things by meaning, so "blue summer dress" surfaces the *sundress* and the *frock*.
+*Real-world use:* NorthStar's fixed search bar — and help-desk portals where "my screen is frozen" finds the article titled "application not responding".
+
+**TF-IDF vs embeddings (hybrid search)** — Keyword-based TF-IDF wins on exact tokens (product codes, brand names); embeddings win on synonyms and paraphrases. Real systems run both and merge results.
+*Real-world use:* An airline site matching "BA283" exactly by keywords, but "cheap flight to LA in spring" by meaning.
+
+**Evaluating retrieval (top-1 / top-K accuracy)** — Keep a small hand-labelled set of (query → right answer) pairs and measure how often the right item appears first, or in the top five. Without it, "feels better" is guesswork.
+*Real-world use:* A job-search site checks that for "junior data analyst, remote", the known-relevant postings actually appear on page one after every update.
+
+---
+
 ## Check your understanding
 
 Work through these after finishing the three Part notebooks. Attempt each question on your own first.
@@ -70,7 +100,7 @@ Work through these after finishing the three Part notebooks. Attempt each questi
 
 ### Part 2 — Pretrained sentence embeddings
 
-**Q3 — Read the cosine.** `all-MiniLM-L6-v2` returns cosine(*frock*, *dress*) = 0.249. A colleague says: "Only 25% similar — that's not very high." Are they reading it correctly?
+**Q3 — Read the cosine.** `all-MiniLM-L6-v2` returns cosine(*frock*, *dress*) ≈ 0.25 (your exact value may vary slightly with model version). A colleague says: "Only 25% similar — that's not very high." Are they reading it correctly?
 
 > **Sample answer:** No. Sentence-transformer cosines for this model mostly live in the range [0.2, 0.7], and the floor is not 0 — with `all-MiniLM-L6-v2` even unrelated pairs (e.g. *dress*/*spaceship* ≈ 0.257) score around 0.25, roughly the same as the *frock*/*dress* synonym (0.249). So a 0.25 is **not** "25% similar", and a single pairwise cosine tells you very little by itself. The right way to use cosines is to *rank* candidates within a query against the whole corpus — where the relevant items aggregate enough signal to rise to the top — not to read one pair as a percentage out of 100%.
 

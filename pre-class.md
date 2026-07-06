@@ -18,6 +18,8 @@ This is the simplest version of "show up prepared": watch a short intro, run one
 
 A short orientation to the week: why keyword search fails on real catalogues, and how embeddings let Sarah build meaning-based search. Watch it before opening the notebook.
 
+🕹️ **After the video:** open the [interactive key-concepts page](https://su-ntu-ctp.github.io/6m-data-3.9-Natural-Language-Processing/) and play with it for 10–15 minutes. Drag the sliders, click the buttons — you can't break anything. Arriving in class having *seen* these ideas move makes the session far easier.
+
 ---
 
 ## Step 1 — Try it (~20 min)
